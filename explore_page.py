@@ -7,7 +7,8 @@ import streamlit as st
 import ui
 from model import EDUCATION_LEVELS
 
-DATA_PATH = Path(__file__).parent / "survey_results_public.csv"
+# Compact extract of the 2020 survey (only the columns used here), small enough to commit.
+DATA_PATH = Path(__file__).parent / "survey_salaries.csv.gz"
 
 
 def shorten_categories(categories, cutoff):
@@ -51,11 +52,7 @@ def show_explore_page():
     ui.hero("The developer salary atlas", "Full-time developers from the 2020 Stack Overflow Developer Survey.")
 
     if not DATA_PATH.exists():
-        st.warning(
-            "Survey data not found. Download the 2020 Stack Overflow Developer Survey from "
-            "https://survey.stackoverflow.co/ and place `survey_results_public.csv` next to `app.py`.",
-            icon="📂",
-        )
+        st.warning("Survey data not found: `survey_salaries.csv.gz` should be next to `app.py`.", icon="📂")
         return
 
     df = load_data()

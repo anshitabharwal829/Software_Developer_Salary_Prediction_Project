@@ -15,9 +15,11 @@ streamlit run app.py
 ```
 
 # Data
-The model was trained on the Stack Overflow Developer Survey (2020), which is not included in this repository.
-The Predict page works without it, using `saved_steps.pkl`. For the Explore page and the notebook,
-download the survey from https://survey.stackoverflow.co/ and place `survey_results_public.csv` in the project folder.
+The model was trained on the Stack Overflow Developer Survey (2020).
+`survey_salaries.csv.gz` is an extract of that survey (country, education, experience, employment and salary),
+used by the Explore page. The survey data is made available by Stack Overflow under the
+[Open Database License (ODbL)](https://opendatacommons.org/licenses/odbl/1-0/), which also covers this extract.
+The notebook needs the full `survey_results_public.csv` from https://survey.stackoverflow.co/.
 
 # License
 This project is licensed under the MIT License - see the LICENSE file for details.
