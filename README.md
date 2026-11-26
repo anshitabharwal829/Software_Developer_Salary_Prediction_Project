@@ -2,15 +2,22 @@
 Project Overview
 The Software Developer Salary Prediction project aims to predict the salary of a software developer based on various factors such as years of experience, skills, education, location, and more. This project utilizes machine learning techniques to train a model capable of providing salary predictions for software developers, helping both candidates and employers make more informed decisions.
 # Technologies Used
-Python: Primary programming language.
-Pandas: For data manipulation and analysis.
-Scikit-learn: For machine learning models and algorithms.
-Matplotlib / Seaborn: For data visualization.
-Flask (optional, if you create a web app): For building a simple web interface for salary predictions.
+Python, Pandas, NumPy, scikit-learn, Streamlit and Plotly.
+
+# Setup and Run
+Requires Python 3.12 or newer.
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+streamlit run app.py
+```
+
 # Data
-The dataset used in this project contains information about software developer salaries and related features such as experience, education, and location.
-Data Sources:
-Public data from job boards or salary websites.
-Synthetic data (for testing purposes) can be generated using specific scripts provided in the repo.
+The model was trained on the Stack Overflow Developer Survey (2020), which is not included in this repository.
+The Predict page works without it, using `saved_steps.pkl`. For the Explore page and the notebook,
+download the survey from https://survey.stackoverflow.co/ and place `survey_results_public.csv` in the project folder.
+
 # License
 This project is licensed under the MIT License - see the LICENSE file for details.
