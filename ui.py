@@ -24,7 +24,7 @@ CSS = """
         #0e1020;
 }
 [data-testid="stHeader"] { background: transparent; }
-.block-container { padding-top: 2.5rem; }
+.block-container { padding-top: 4.5rem; }
 .hero {
     padding: 2.2rem 2.4rem; border-radius: 1.4rem; margin-bottom: 1.2rem; color: #fff;
     background: linear-gradient(120deg, #4f3fd1, #8b3fc4 45%, #0f8f8a);
@@ -82,3 +82,12 @@ def chart(fig, **layout):
     fig.update_layout(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
                       margin={"l": 10, "r": 10, "t": 50, "b": 10}, **layout)
     st.plotly_chart(fig, config={"displayModeBar": False})
+
+
+def profile_inputs(key, countries, education_levels, max_experience, default):
+    """Country, education and experience controls. Returns the three values."""
+    country = st.selectbox("Country", countries, index=countries.index(default[0]),
+                           format_func=lambda c: f"{flag(c)}  {c}", key=f"{key}_country")
+    education = st.select_slider("Education level", education_levels, value=default[1], key=f"{key}_education")
+    experience = st.slider("Years of experience", 0, max_experience, default[2], key=f"{key}_experience")
+    return country, education, experience

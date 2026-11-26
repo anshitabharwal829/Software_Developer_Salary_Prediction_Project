@@ -5,9 +5,9 @@ import plotly.express as px
 import streamlit as st
 
 import ui
+from model import EDUCATION_LEVELS
 
 DATA_PATH = Path(__file__).parent / "survey_results_public.csv"
-EDUCATION_LEVELS = ["Less than a Bachelors", "Bachelors degree", "Masters degree", "Post grad"]
 
 
 def shorten_categories(categories, cutoff):
@@ -63,10 +63,21 @@ def show_explore_page():
         st.warning("No rows left after filtering. Check that this is the 2020 survey file.")
         return
 
-    selected = st.multiselect("Filter by country", sorted(df["Country"].unique()), placeholder="All countries",
-                              format_func=lambda c: f"{ui.flag(c)}  {c}")
+    with st.expander("🔎 Filters", expanded=True):
+        first, second, third = st.columns(3)
+        selected = first.multiselect("Country", sorted(df["Country"].unique()), placeholder="All countries",
+                                     format_func=lambda c: f"{ui.flag(c)}  {c}")
+        levels = second.multiselect("Education level", EDUCATION_LEVELS, placeholder="All levels")
+        low, high = third.slider("Years of experience", 0, 50, (0, 50))
+
     if selected:
         df = df[df["Country"].isin(selected)]
+    if levels:
+        df = df[df["EdLevel"].isin(levels)]
+    df = df[df["YearsCodePro"].between(low, high)]
+    if df.empty:
+        st.info("No responses match these filters. Try widening them.")
+        return
 
     stats = df.groupby("Country")["Salary"].agg(Median="median", Responses="count").sort_values("Median")
     stats = stats.reset_index()
@@ -118,3 +129,6 @@ def show_explore_page():
         fig.update_traces(marker_color=ui.BLUE)
         fig.update_yaxes(tickprefix="$", tickformat="~s")
         ui.chart(fig)
+
+    st.download_button("⬇️ Download filtered data (CSV)", lambda: df.to_csv(index=False),
+                       "filtered_salaries.csv", "text/csv")
