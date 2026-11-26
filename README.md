@@ -1,11 +1,14 @@
 # Software_Developer_Salary_Prediction_Project
+
+**Live demo:** https://softwaredevelopersalarypredictionproject-rnre63cyvcliq9wusnb2z.streamlit.app/
+
 Project Overview
 The Software Developer Salary Prediction project aims to predict the salary of a software developer based on various factors such as years of experience, skills, education, location, and more. This project utilizes machine learning techniques to train a model capable of providing salary predictions for software developers, helping both candidates and employers make more informed decisions.
 # Technologies Used
 Python, Pandas, NumPy, scikit-learn, Streamlit and Plotly.
 
 # Setup and Run
-Requires Python 3.12 or newer.
+Requires Python 3.12.
 
 ```bash
 python3 -m venv .venv
